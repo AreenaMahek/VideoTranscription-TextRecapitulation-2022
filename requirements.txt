@@ -1,0 +1,31 @@
+#Requirements 
+pip                                21.0.1    
+ffmpeg                             1.4 //for video to audio
+beautifulsoup4                     4.9.1
+soupsieve                          2.0.1
+bs4                                0.0.1      
+Flask                              1.1.2
+werkzeug                           1.0.1      
+nltk                               3.7
+rake-nltk                          1.0.6       
+spacy                              3.1.1  
+en_core_web_sm                     3.1.0  
+sumy                               0.8.1     
+thinc                              8.0.8     
+urllib3                            1.25.9
+gensim                             3.8.3
+gensim-sum-ext                     0.1.2 
+pycorenlp                          0.3.0
+Cython                             0.29.14
+SpeechRecognition                  3.8.1
+pydub                              0.25.1
+transformers                       4.18.0
+torch                              1.11.0
+tensorflow-cpu                     2.8.0
+flax                               0.3.5
+huggingface-hub                    0.5.1
+sentencepiece                      0.1.96
+moviepy                            1.0.3
+youtube-transcript-api             0.4.4
+wordcloud                          1.8.1
+gpt                                 0.2
