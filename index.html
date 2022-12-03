@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>VT&TR</title>
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="static/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="static/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+</head>
+<body>
+    <div class="navbar-fixed">
+   <nav class="indigo darken-4" role="navigation">
+    <div class="nav-wrapper container">  
+      <a id="logo-container" text-align="" href="#" class="brand-logo">VT&TR</a> 
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{url_for('index')}}">Summarization</a></li>
+         <li><a href="{{url_for('compare_summary')}}">Compare Extractive Summarizers</a></li>
+         <li><a href="{{url_for('compare_summary_abs')}}">Compare Abstractive Summarizers</a></li>
+         <li><a href="{{url_for('text_generator')}}">Video-to-Text</a></li>
+          <li><a href="{{url_for('audio_text_generator')}}">Audio-to-Text</a></li>
+         <li><a href="{{url_for('aboutapp')}}">About</a></li>
+      </ul>
+      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+</div>
+	
+<!--Slider -->
+ <section class="section section-solutions-about  purple darken-1 slider">
+  <div id="index-banner" class="parallax-container">
+     <ul class="slides">
+      <li>
+         <img src="{{url_for('static', filename='newbg.jpg')}}" align="middle" />
+        <div class="caption center-align"> 
+          <h2>Summarization Simplified</h2>
+          <h5> Using Extractive and Abstractive Approaches </h5>
+           <div class="row center">
+          <a href="{{url_for('index')}}" id="download-button" class="btn btn-large waves-effect waves-purple indigo darken-4">Refresh</a>
+        </div>
+        </div>
+      </li>
+      <li>
+        <img src="{{url_for('static', filename='newbg.jpg')}}" align="middle" />
+        <div class="caption left-align">
+          <h2>Text Mining using Web Scraping</h2>
+          <h5>NLP based Application</h5>
+          <a href="#aboutapp" class="btn btn-large waves-effect waves-purple indigo darken-4">Learn More</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Start of Main Section -->
+ <div class="container">
+    <div class="section">
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="input-field col s12 m10">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="small material-icons">chrome_reader_mode</i></h2>
+            <h3 class="center" size=40px> Text Mining  </h3>
+         
+         <form id="textsum" method="POST" action="">
+         <textarea name="rawtext" cols="5" rows="20" class="form-control" required="true" placeholder="Enter Text Here"></textarea>
+         <button class="btn btn-small waves-effect waves-yellow indigo darken-4" formaction="/analyze" type="submit">Ex-NLTK Summarizer</button>
+         <button class="btn btn-small waves-effect waves-yellow indigo darken-4" formaction="/analyze_gpt" type="submit">Abst-GPT Summarizer</button>
+         <button class="btn btn-small waves-effect waves-yellow purple darken-1" type="reset">Clear</button>
+         
+          </form>
+          </div>
+        </div>
+      </div>
+
+
+        <div class="row">
+        <div class="input-field col s12 m10">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="small material-icons">web</i></h2>
+            <h3 class="center" size=40px>Web Scraping </h3>           
+          <form id="textsum" method="POST" action="">
+         <input type="text" name="raw_url" placeholder="Enter URL Here" required="true">
+         <button class="btn btn-small waves-effect waves-yellow indigo darken-4" formaction="/analyze_url" type="submit">Ext-NLTK Summarizer</button>
+         <button class="btn btn-small waves-effect waves-yellow indigo darken-4" formaction="/analyze_url_gpt" type="submit">Abst-GPT Summarizer</button>
+         <button class="btn btn-small waves-effect waves-teal purple darken-1" type="reset">Clear</button>
+         </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End -->
+
+  <!-- Result Display-->
+  <section class="section section-solutions-about grey darken-2">
+ <div class="container white-text">
+ 
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="small material-icons">group</i></h2>
+            <h5 class="center">Your Text</h5>
+             <p>Reading Time: <span style="color:#ffffff ;" >{{ final_reading_time }} mins </span></p>
+            <p class="light" align="justify" >{{ctext}}</p>
+            <!--<div class="alert alert-info" role="alert"><p>Time Elapsed: <span style="color:#ffffff ">{{ final_time }} mins </span></p><br/></div>-->
+          </div>
+        </div>
+        <div class="col s12 m6 grey darken-3">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="small material-icons">chrome_reader_mode</i></h2>
+            <h5 class="center">Summarized Text</h5>
+              <div class="" role="alert">
+              <p>Reading Time: <span style="color:#ffffff " >{{ summary_reading_time }} mins </span></p></div>
+            <p class="light" align="justify">{{ final_summary }}</p>
+            
+          </div>
+        </div>
+        <div class="col s12 m6 grey darken-3">
+          <div class="icon-block">
+            <h2 class="center brown-text"><i class="small material-icons">chrome_reader_mode</i></h2>
+            <h5 class="center"> Keywords </h5>
+              <div class="" role="alert">
+              
+            <p class="light" align="justify">{{ keywords }}</p>
+            <h2 class="center brown-text"><i class="small material-icons">poll</i></h2>
+            <h5 class="center"> Accuracy  </h5>
+            <p class="light" align="justify">F-Score= {{ rouge_s }}</p>
+            
+            
+             
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+
+  <footer class="page-footer grey darken-4">
+    <div class="container" id="aboutapp">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">About this Application</h5>
+          <p class="grey-text text-lighten-4">This Text Summarization tool uses two approaches that involve the Extractive and the Abstractive methods to generate a summary. The Extractive Approach uses the TFIDF library and 
+          the Abstractive Approach uses the GPT module based on Hugging face transformers to paraphrase the sentences and produce a short and a coherent summary.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      <a class="white-text text-lighten-3">MAJOR PROJECT BY: AREENA MAHEK </a><br/>
+      <a class="white-text text-lighten-3">160620742101</a><br/>
+      <a class="white-text text-lighten-3">M.Tech CSE </a><br/>
+      </div>
+    </div>
+  </footer>
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="static/js/materialize.js"></script>
+  <script src="static/js/init.js"></script>
+
+  </body>
+</html>
