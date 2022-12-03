@@ -1,0 +1,8 @@
+step1: type pip install flask
+step2: type pip install virtualenv
+step3: make a folder in that respective path where it is needed
+step4: in cmd enter the folder using cd command
+step5: type virtualenv venv    (venv is virtualenvironmentname)
+		venv folder is created in the folder created
+step6: to activate the flask environment
+	type venv\Scripts\activate
